@@ -3,6 +3,8 @@ import base64
 import time
 import json
 from openai import AzureOpenAI
+from dotenv import load_dotenv
+load_dotenv()
 
 # Load environment variables or use defaults
 endpoint = os.getenv("ENDPOINT_URL")
