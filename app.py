@@ -6,14 +6,40 @@ import tempfile
 from PIL import Image
 from app_helper import predict
 
+
 st.set_page_config(layout="wide", page_title="Image Alt Text Generator")
 
-#st.markdown("<div style='display: flex; justify-content: center;'>", unsafe_allow_html=True)
-#st.image(r"C:\Users\vwaingankar\Desktop\alt_text_gen\logofinal.png", width=350)
-#st.markdown("</div>", unsafe_allow_html=True)
 
-st.title("Image Alt Text Generation")
-st.write("Upload one or multiple images to generate alt text with detailed metadata using Azure OpenAI.")
+def check_password():
+    
+    def password_entered():
+        
+        correct_username = "admin"
+        correct_password = "qpalzm4567"  
+        
+        if st.session_state["username"].lower() == correct_username and \
+           st.session_state["password"] == correct_password:
+            st.session_state["password_correct"] = True
+            del st.session_state["password"]  
+            del st.session_state["username"]  
+        else:
+            st.session_state["password_correct"] = False
+            st.error("😕 Invalid username or password")
+
+    if st.session_state.get("password_correct", False):
+        return True
+
+    
+    st.markdown("<h1 style='text-align: center;'>Login Required</h1>", unsafe_allow_html=True)
+    
+    
+    col1, col2, col3 = st.columns([1, 2, 1])
+    with col2:
+        st.text_input("Username", key="username")
+        st.text_input("Password", type="password", key="password")
+        st.button("Login", on_click=password_entered)
+    
+    return False
 
 def safe_display_image(file, caption, use_container_width=True):
     try:
@@ -33,8 +59,18 @@ def safe_display_image(file, caption, use_container_width=True):
         except Exception as conversion_error:
             st.error(f"Could not display image: {str(e)}. Conversion also failed: {str(conversion_error)}")
 
-def main():
-    # Add project ID field
+def main_app():
+    
+    st.markdown("<div style='display: flex; justify-content: center;'>", unsafe_allow_html=True)
+    try:
+        st.image(r"C:\Users\vwaingankar\Desktop\alt_text_gen\logofinal.png", width=350)
+    except:
+        st.warning("Logo image not found. Update the path in the code or remove this section.")
+    st.markdown("</div>", unsafe_allow_html=True)
+
+    st.title("Image Alt Text Generation")
+    st.write("Upload one or multiple images to generate alt text with detailed metadata using Azure OpenAI.")
+
     project_id = st.text_input(
         "Project ID",
         placeholder="Enter project identifier",
@@ -60,7 +96,6 @@ def main():
                 image_paths.append(temp_path)
             
             with st.spinner(f"Generating alt text for {len(image_paths)} image(s)..."):
-                # Pass project_id to predict function
                 all_results = predict(image_paths, user_context, project_id)
             
             for i, uploaded_file in enumerate(uploaded_files):
@@ -88,7 +123,6 @@ def main():
                         st.subheader("Metadata")
                         metadata = result["metadata"]
                         
-                        # Display project ID in the UI
                         if "project_id" in metadata:
                             st.info(f"Project ID: {metadata['project_id']}")
                         
@@ -118,6 +152,14 @@ def main():
                 file_name="alt_text_results.json",
                 mime="application/json"
             )
+
+def main():
+    
+    if "password_correct" not in st.session_state:
+        st.session_state["password_correct"] = False
+    
+    if check_password():
+        main_app()
 
 if __name__ == "__main__":
     main()
