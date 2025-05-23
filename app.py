@@ -63,7 +63,7 @@ def main_app():
     
     st.markdown("<div style='display: flex; justify-content: center;'>", unsafe_allow_html=True)
     try:
-        st.image(r"C:\Users\vwaingankar\Desktop\alt_text_gen\logofinal.png", width=350)
+        st.image(r"logofinal.PNG", width=350)
     except:
         st.warning("Logo image not found. Update the path in the code or remove this section.")
     st.markdown("</div>", unsafe_allow_html=True)
