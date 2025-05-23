@@ -8,9 +8,9 @@ from app_helper import predict
 
 st.set_page_config(layout="wide", page_title="Image Alt Text Generator")
 
-st.markdown("<div style='display: flex; justify-content: center;'>", unsafe_allow_html=True)
-st.image(r"C:\Users\vwaingankar\Desktop\alt_text_gen\logofinal.png", width=350)
-st.markdown("</div>", unsafe_allow_html=True)
+#st.markdown("<div style='display: flex; justify-content: center;'>", unsafe_allow_html=True)
+#st.image(r"C:\Users\vwaingankar\Desktop\alt_text_gen\logofinal.png", width=350)
+#st.markdown("</div>", unsafe_allow_html=True)
 
 st.title("Image Alt Text Generation")
 st.write("Upload one or multiple images to generate alt text with detailed metadata using Azure OpenAI.")
