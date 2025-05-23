@@ -3,6 +3,8 @@ import base64
 import time
 import json
 from openai import AzureOpenAI
+from dotenv import load_dotenv
+load_dotenv()
 
 endpoint = os.getenv("ENDPOINT_URL", "https://alt-text-gen-openai-poc.openai.azure.com/openai/deployments/gpt-4.1/chat/completions?api-version=2025-01-01-preview")
 deployment = os.getenv("DEPLOYMENT_NAME", "gpt-4.1")
