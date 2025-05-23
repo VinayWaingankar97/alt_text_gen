@@ -3,9 +3,7 @@ import base64
 import time
 import json
 from openai import AzureOpenAI
-from dotenv import load_dotenv
-load_dotenv()
-
+ 
 endpoint = os.getenv("ENDPOINT_URL")
 deployment = os.getenv("DEPLOYMENT_NAME", "gpt-4.1")
 subscription_key = os.getenv("AZURE_OPENAI_API_KEY")
