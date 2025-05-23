@@ -24,7 +24,7 @@ def check_password():
             del st.session_state["username"]  
         else:
             st.session_state["password_correct"] = False
-            st.error("😕 Invalid username or password")
+            st.error("Invalid username or password")
 
     if st.session_state.get("password_correct", False):
         return True
