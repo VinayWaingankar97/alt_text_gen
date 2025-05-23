@@ -6,9 +6,9 @@ from openai import AzureOpenAI
 from dotenv import load_dotenv
 load_dotenv()
 
-endpoint = os.getenv("ENDPOINT_URL", "https://alt-text-gen-openai-poc.openai.azure.com/openai/deployments/gpt-4.1/chat/completions?api-version=2025-01-01-preview")
+endpoint = os.getenv("ENDPOINT_URL")
 deployment = os.getenv("DEPLOYMENT_NAME", "gpt-4.1")
-subscription_key = os.getenv("AZURE_OPENAI_API_KEY", "B76JFNwYMyR4MgJt2kdMXJNugqVLbWACYpda8rTTbDJL5YrOu3o8JQQJ99BEACHYHv6XJ3w3AAABACOGe7sd")
+subscription_key = os.getenv("AZURE_OPENAI_API_KEY")
 
 INPUT_TOKEN_PRICE_PER_1K = 0.02
 OUTPUT_TOKEN_PRICE_PER_1K = 0.08
